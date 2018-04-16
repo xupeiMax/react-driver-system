@@ -1,0 +1,53 @@
+.component-header {
+    height: 80px;
+    box-sizing: border-box;
+    padding: 15px 25px;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.component-header .caption {
+    display: inline-block;
+    font-size: 40px;
+    text-indent: 20px;
+    font-weight: 400;
+    color: #00b1ff;
+}
+
+.component-header ul {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}
+
+.component-header li {
+    font-size: 20px;
+    list-style: none;
+    display: inline-block;
+    margin-right: 80px;
+    color: #00b1ff;
+    text-shadow: 1px 1px 1px rgba(10, 72, 180, 0.3)
+}
+
+.active {
+    color: #00b1ff;
+}
+
+.login-wrap {
+    display: inline-block;
+    position: relative;
+    margin-right: 180px;
+}
+
+.login-wrap img {
+    border-radius: 50%;
+}
+
+.login-wrap .nichen {
+    position: absolute;
+    top: 20px;
+    margin-left: 20px;
+}

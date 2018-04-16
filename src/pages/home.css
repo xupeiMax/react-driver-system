@@ -1,0 +1,54 @@
+
+.inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.inner h1 {
+    font-size: 50px;
+    font-weight: 500;    
+    color: #00b1ff;
+    margin-top: 50px;
+}
+.welcome{
+    background-color: #ccc;
+}
+.inner h2 {
+    font-size: 40px;
+    font-weight: normal;
+    color: #00b1ff;
+    margin-top: 40px;
+}
+form{
+    max-width: 500px;
+    margin: 30px auto;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: vw(2) vw(1) vw(13) 0 rgba(35, 24, 21, 0.11);
+
+}
+.form-group {
+    width: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin: 30px 0;    
+}
+.form-group label,
+.form-group input{
+    display: block;    
+    width: 300px;
+}
+
+.form-group label{
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group input{
+    height: 40px;
+    border: none;
+    outline: 0;
+}
+
