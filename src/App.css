@@ -3,3 +3,17 @@ body{
 }
 
 
+.inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+li{
+    list-style: none;
+}
+
+input{
+    border: none;
+    outline: 0;
+}
