@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './option.css';
-import Pubsub from 'pubsub-js';
-
 
 
 class Option extends Component {
@@ -13,7 +11,7 @@ class Option extends Component {
     }
     componentDidMount() { }
     check(i) {
-        Pubsub.publish('SELECTED',i);
+        this.props.check(i);
     }
 
     render() {

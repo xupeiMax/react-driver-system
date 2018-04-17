@@ -11,7 +11,15 @@
     box-sizing: border-box;
     margin-right: 10px;
 }
+.selected{
+    color:#fff;
+    background-color: #ccc;
+}
 
+.blue{
+    color:#fff;
+    background-color: #00b1ff;
+}
 .error {
     border-color: #f00;
     background-color: #f00;

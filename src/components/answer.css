@@ -1,15 +1,25 @@
-.component-answer{
+.component-answer {
     text-align: left;
 }
 
-.component-answer li{
+.component-answer li {
     margin-top: 30px;
     height: 30px;
     line-height: 30px;
 }
 
-p{
+p {
     width: 100%;
     height: 30px;
     margin-top: 20px;
+}
+
+.confirm {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 5px 20px;
+    color: #fff;
+    background: -webkit-linear-gradient(left,#00b1ff, rgb(37, 140, 201));
+    border-radius: 20px;
+    cursor: pointer;
 }
