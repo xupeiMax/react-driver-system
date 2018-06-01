@@ -1,10 +1,13 @@
 
-const STORAGE_KEY = 'question_id'
+// const STORAGE_KEY = 'question_id'
 export default {
-    fetch() {
-        return JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[0]')
+    fetch(STORAGE_KEY) {
+        return JSON.parse(window.localStorage.getItem(STORAGE_KEY))
     },
-    save(items) {
+    save(items, STORAGE_KEY) {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    },
+    delete(STORAGE_KEY) {
+        window.localStorage.removeItem(STORAGE_KEY)
     }
 }

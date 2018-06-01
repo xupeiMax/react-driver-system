@@ -15,18 +15,18 @@ class MultiOption extends Component {
     }
 
     render() {
-        let spanClassName = 'option';
+        let spanClassName = 'component-option';
         if (this.props.focus === 'checked'){
             spanClassName += ' selected';
         }
         if (this.props.focus === 'right'){
-            spanClassName = 'option right';
+            spanClassName = 'component-option right';
         }
         if (this.props.focus === 'error') {
-            spanClassName = 'option error';
+            spanClassName = 'component-option error';
         }
         if (this.props.focus === 'blue') {
-            spanClassName = 'option blue';
+            spanClassName = 'component-option blue';
         }
         return (
 

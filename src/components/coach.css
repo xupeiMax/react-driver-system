@@ -1,0 +1,32 @@
+.component-coach{
+    margin-right: 20px;
+    margin-top: 20px !important;
+    float:left;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.component-coach .media{
+    padding: 10px 0;
+}
+
+.component-timesection{
+    float:left;
+    background-color: #eee;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 3px 5px;
+    width:30%;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.component-timesection p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.component-timesection:hover{
+    background-color: #ddd;
+}

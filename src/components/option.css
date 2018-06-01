@@ -1,4 +1,4 @@
-.option {
+.component-option {
     position: relative;
     display: inline-block;
     width: 30px;
@@ -11,22 +11,22 @@
     box-sizing: border-box;
     margin-right: 10px;
 }
-.selected{
+.component-option.selected {
     color:#fff;
     background-color: #ccc;
 }
 
-.blue{
+.component-option.blue {
     color:#fff;
     background-color: #00b1ff;
 }
-.error {
+.component-option.error {
     border-color: #f00;
     background-color: #f00;
     font-size: 0;
 }
 
-.error::before {
+.component-option.error::before {
     position: absolute;
     content: "";
     top: 15px;
@@ -37,7 +37,7 @@
     transform: rotate(45deg);
 }
 
-.error::after {
+.component-option.error::after {
     position: absolute;
     content: "";
     top: 15px;
@@ -48,7 +48,7 @@
     transform: rotate(-45deg);
 }
 
-.right {
+.component-option.right {
     border-color: #00b1ff;
     background-color: #00b1ff;
     font-size: 0;

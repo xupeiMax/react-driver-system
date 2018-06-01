@@ -32,21 +32,21 @@
     text-shadow: 1px 1px 1px rgba(10, 72, 180, 0.3)
 }
 
-.active {
+.component-header .active {
     color: #00b1ff;
 }
 
-.login-wrap {
+.component-header .login-wrap {
     display: inline-block;
     position: relative;
     margin-right: 180px;
 }
 
-.login-wrap img {
+.component-header .login-wrap img {
     border-radius: 50%;
 }
 
-.login-wrap .nichen {
+.component-header .login-wrap .nichen {
     position: absolute;
     top: 20px;
     margin-left: 20px;

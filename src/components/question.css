@@ -1,22 +1,23 @@
-.ques {
+.component-question .ques {
     margin-top: 20px;
     text-align: left;
 }
 
-.btn {
-    margin-top: 30px;
+.component-question .btn {
+    /* margin-top: 30px; */
     display: inline-block;
     padding: 5px 8px;
     color: #fff;
     background-color: #00b1ff;
     cursor: pointer;
+    letter-spacing: 3px;
 }
 
-.prev {
+.component-question .prev {
     float: left;
 }
 
-.ques span{
+.component-question .ques span {
     font-size: 12px;
     padding: 2px 3px;
     margin-right: 10px;

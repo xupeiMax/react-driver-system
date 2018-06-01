@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 // import $ from 'jquery'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as HashRouter, Route, Switch } from 'react-router-dom'
 import Pubsub from 'pubsub-js'
+import Store from './sources/store';
 
 import Header from './components/header'
 import Home from './pages/home'
@@ -16,30 +17,40 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      name: '青青'
+      name: Store.fetch('USER_NAME')
     };
   }
   componentDidMount() {
-    Pubsub.subscribe('DENG_LU', (msg) => {
+     
+    Pubsub.subscribe('DENG_LU', (msg,name,psw) => {
       this.setState({
-          loggedIn: true
-      })
+          loggedIn: true,
+          name: name
+      });
+      Store.save(name,'USER_NAME')
     })
 
   }
+
+  componentWillUnmount(){
+    Pubsub.unsubscribe('DENG_LU')
+    
+    // Store.delete('USER_NAME')
+  }
+
   render() {
     const Index = () => (
       <Home
-        loggedIn={this.state.loggedIn} name={this.state.name}
+        loggedIn={this.state.name} name={this.state.name}
       />
     );
     const Nav = () => (
       <Header
-        loggedIn={this.state.loggedIn} name={this.state.name}
+        loggedIn={this.state.name} name={this.state.name}
       />
     );
     return (
-      <Router >
+      <HashRouter >
         <section>
           <Nav />
           <Switch>
@@ -50,7 +61,7 @@ class App extends Component {
             <Route path="/lesson4" component={Lesson4} />            
           </Switch>
         </section>
-      </Router>
+      </HashRouter>
     );
   }
 }

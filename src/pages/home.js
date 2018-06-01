@@ -12,8 +12,10 @@ class Home extends Component {
     }
     componentDidMount() { }
     denglu(e) {
-        e.preventDefault();        
-        Pubsub.publish('DENG_LU');
+        e.preventDefault();    
+        const userName = e.target.elements[0].value;
+        const psw = e.target.elements[1].value;
+        Pubsub.publish('DENG_LU',userName,psw);
     }
     render() {
 
@@ -36,7 +38,7 @@ class Home extends Component {
                         <input type="password" name="psw" placeholder="请输入密码" />
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="提交"/>
+                        <input type="submit" value="提 交"/>
                     </div>
                 </form>
             )

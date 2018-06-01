@@ -33,11 +33,11 @@ class Header extends Component {
         return (
             <div className="component-header">
                 <h1 className="caption"><Link to="./">驾考服务</Link></h1>
-                <ul className="">
-                    <li><Link to="./lesson1">科目一</Link></li>
-                    <li><Link to="./lesson2">科目二</Link></li>
-                    <li><Link to="./lesson3">科目三</Link></li>
-                    <li><Link to="./lesson4">科目四</Link></li>                    
+                <ul>
+                    <li><Link to="/lesson1">科目一</Link></li>
+                    <li><Link to="/lesson2">科目二</Link></li>
+                    <li><Link to="/lesson3">科目三</Link></li>
+                    <li><Link to="/lesson4">科目四</Link></li>                    
                 </ul>
                 {userProfile}
             </div>

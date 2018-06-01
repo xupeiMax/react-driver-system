@@ -1,20 +1,21 @@
 .question-wrap{
 }
 
-.ques{
-    margin-top: 20px;
-    text-align: left;    
-}
-
-.btn{
-    margin-top: 30px;
-    display: inline-block;
-    padding: 5px 8px;
-    color: #fff;
-    background-color: #00b1ff;
-    cursor: pointer;
-}
-
 .prev{
     float: left;
+}
+.modelwrap{
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+.ques-model{
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    color: #fff;
+    background: #00b1ff;
 }

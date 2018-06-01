@@ -18,7 +18,7 @@ class Option extends Component {
        
         return (
    
-            <span className={`option ${this.props.focus == null ? '' : `${this.props.focus?'right':'error'}`}`}  onClick={this.check.bind(this, this.props.index)}>
+            <span className={`component-option ${this.props.focus == null ? '' : `${this.props.focus?'right':'error'}`}`}  onClick={this.check.bind(this, this.props.index)}>
                 {this.props.children}
             </span>
         )
