@@ -1,4 +1,4 @@
-export const reservations = [
+export const RESERVATIONS = [
     {   
         id: 1,
         coach: {

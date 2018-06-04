@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './lesson2.css';
 import Coach from '../components/coach';
-import { reservations } from '../sources/reservation';
+import { RESERVATIONS } from '../sources/reservation';
 import Pubsub from 'pubsub-js';
 import Store from '../sources/store';
 
 class TimeBox extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+        };
         this.handleClick = this.handleClick.bind(this);        
     }
     handleClick(e) {
@@ -30,6 +31,7 @@ class Lesson2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            reservations: RESERVATIONS,            
             timeArr:[],
             username: Store.fetch('USER_NAME')
         };
@@ -42,11 +44,32 @@ class Lesson2 extends Component {
         Pubsub.subscribe('DO_RESERVATION', (msg,data)=>{
             let index = data.index;
             let id = data.id;
-            if(this.state.username){
+            let name = this.state.username;
+            let reservations = this.state.reservations;
+            if(name){
+                for (let i = 0; i < reservations.length;i++){
+                    if (reservations[i].id === id) {
+                        let students = reservations[i].students[index];
+                        if (students.indexOf(name) > -1) {
+                            students.splice(students.indexOf(name), 1);
+                            alert("您已成功取消预约！");
+                        } else {
+                            if(students.length === 3) {
+                                alert("抱歉，已约满。请预约其它时间！");
+                                return false;
+                            }
+                            students.push(name);
+                            alert("您已成功预约！");                            
+                        }
+                        this.setState({
+                            reservations: reservations
+                        })
+                        break;
+                    }
+                }
             } else{
                 alert("您还未登录，请登录后预约！")
             }
-            // for(let i)
         });        
     }
 
@@ -64,6 +87,7 @@ class Lesson2 extends Component {
             timeArr: arr
         })
     }
+    
     render() {
         let week = ['周日','周一','周二','周三','周四','周五','周六'];
         let timebox = [];        
@@ -77,6 +101,7 @@ class Lesson2 extends Component {
         }
         
         let listEle = null;
+        let reservations = this.state.reservations;
         listEle = reservations.map((item) => {
             return (
                 <Coach key={item.id} coachitem={item}></Coach>
