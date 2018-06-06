@@ -24,7 +24,7 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    console.log('user:')
+    // console.log('user:')
     // console.log(this.state.user)
     var that = this;
     // $.ajax({

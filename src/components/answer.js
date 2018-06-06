@@ -9,7 +9,8 @@ class Answer extends Component {
         super(props);
         this.state = {
             check: [],
-            result:''
+            result:'',
+            descflag: false
         };
         this.check = this.check.bind(this);
     }
@@ -28,20 +29,40 @@ class Answer extends Component {
     }
     check(index){
         var ans = this.props.ans;
+        console.log(ans)
+        var ansIdx = 0;
+        switch (ans) {
+            case "A":
+                ansIdx = 0;
+                break;
+            case "B":
+                ansIdx = 1;
+                break;
+            case "C":
+                ansIdx = 2;
+                break;
+            case "D":
+                ansIdx = 3;
+                break;
+            default:
+                ansIdx = 0;            
+                break;
+        }
         var check = this.state.check;
-        if (ans !== index) {
+        if (ansIdx !== index) {
             check[index] = false;
         }
-        check[ans] = true;
+        check[ansIdx] = true;
         this.setState({
             check: check,
-            result: '答案：' + (ans + 10).toString(16).toUpperCase()
+            result: '答案：' + ans,
+            descflag: true
         });
     }
     render() {
         let item = this.props.item;
         let liEle = null;
-        if (item.length > 2) {
+        if (item[2]) {
             liEle = (
                 <ul>
                     <li><Option index={0} focus={this.state.check[0]} check={this.check}>A</Option>{item[0]}</li>
@@ -62,7 +83,8 @@ class Answer extends Component {
         return (
             <div className="component-answer">
                 {liEle}
-                <p>{this.state.result}</p>                
+                <p>{this.state.result}</p>
+                {this.state.descflag ? (<p>解析： {this.props.desc}</p>) : ''}                                                              
             </div>
         )
     }

@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-// import { Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Route, Switch,Link } from 'react-router-dom';
+import Pubsub from 'pubsub-js';
+import $ from 'jquery';
 import Store from '../sources/store';
 import './lesson1.css';
-import { QUESTIONS } from '../sources/question';
+// import { QUESTIONS } from '../sources/question';
 import Question from '../components/question';
 import Test from '../components/test';
-import Pubsub from 'pubsub-js';
 
 
 class Lesson1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            question: QUESTIONS,            
-            cur_id: 1,
+            question: [],            
+            cur_id: 0,
             model: ''
         };
     }
 
     componentDidMount() { 
+        var that = this;
+        $.ajax({
+          "url": `http://localhost:3001/question`
+        }).then((result) => {
+          if(result.success){
+            console.log(result.data)
+            that.setState({
+                question: result.data
+            })
+        }
+        })
         this.setState({
             cur_id: Store.fetch("question_id") || 0,
             sui_id: [],
@@ -39,7 +50,7 @@ class Lesson1 extends Component {
         if(type > 0){
             switch (model) {
                 case "shunxu":
-                    cur_id++;
+                    if (cur_id < this.state.question.length - 1) cur_id++;
                     this.setState({
                         cur_id: cur_id
                     })
@@ -53,7 +64,7 @@ class Lesson1 extends Component {
                     })               
                     break;
                 default:
-                    cur_id++;
+                    if (cur_id < this.state.question.length - 1) cur_id++;
                     this.setState({
                         cur_id: cur_id
                     })
@@ -99,47 +110,55 @@ class Lesson1 extends Component {
     render() {
         let question = this.state.question;
         let questionEle = null;
-        if(this.state.model === "random"){
-            questionEle = question[this.state.sui_id[this.state.idx]];
-        }else{
-            questionEle = question[this.state.cur_id];
-        }
-        const Index = () =>(
-            <div className="modelwrap">
-                <Link to="/lesson1/exercise">
-                    <div className="ques-model" onClick={this.setModel.bind(this,"shunxu")}>顺序做题
-                    </div>
-                </Link>
-                <Link to="/lesson1/exercise">
-                    <div className="ques-model" onClick={this.setModel.bind(this, "random")}>随机做题
-                    </div>
-                </Link>
-                <Link to="/lesson1/exam">
-                    <div className="ques-model" onClick={this.setModel.bind(this, "test")}>模拟考试
-                    </div>
-                </Link>
-            </div>
-  
-        )
-        const Dowork = () => (
-            <Question questionEle={questionEle} next={this.next.bind(this)} model={this.state.model==="random"}></Question>
-        )
-        return (
-            <div className="question-wrap">
-                <div className="inner">
-                    <Router>
-                        <Switch>
-                            <Route exact path="/lesson1" component={Index} />
-                            <Route path="/lesson1/exercise" component={Dowork} />
-                            <Route path="/lesson1/exam" component={Test} />                            
-                        </Switch>
-                    </Router>
-                       
+        if (!question) {
+            return (
+                <h2>还没有题目哦！</h2>
+            )
+        } else {
+
+            if(this.state.model === "random"){
+                questionEle = question[this.state.sui_id[this.state.idx]];
+            }else{
+                questionEle = question[this.state.cur_id];
+            }
+            const Index = () =>(
+                <div className="modelwrap">
+                    <Link to="/lesson1/exercise">
+                        <div className="ques-model" onClick={this.setModel.bind(this,"shunxu")}>顺序做题
+                        </div>
+                    </Link>
+                    <Link to="/lesson1/exercise">
+                        <div className="ques-model" onClick={this.setModel.bind(this, "random")}>随机做题
+                        </div>
+                    </Link>
+                    <Link to="/lesson1/exam">
+                        <div className="ques-model" onClick={this.setModel.bind(this, "test")}>模拟考试
+                        </div>
+                    </Link>
                 </div>
-            </div>
-        );
-       
-    }
+      
+            )
+            const Dowork = () => (
+                <Question questionEle={questionEle} qNum={this.state.cur_id} next={this.next.bind(this)} model={this.state.model==="random"}></Question>
+            )
+            return (
+                <div className="component-lesson1">
+                    <div className="inner">
+                        <Router>
+                            <Switch>
+                                <Route exact path="/lesson1" component={Index} />
+                                <Route path="/lesson1/exercise" component={Dowork} />
+                                <Route path="/lesson1/exam" component={Test} />                            
+                            </Switch>
+                        </Router>
+                           
+                    </div>
+                    
+                </div>
+            );
+           
+        }
+        }
 }
 
 

@@ -33,12 +33,18 @@ class Lesson2 extends Component {
         this.state = {
             reservations: RESERVATIONS,            
             timeArr:[],
-            username: JSON.parse(Store.fetch('USER')).name
+            username: ''
         };
         this.isActive = this.isActive.bind(this);
     }
 
     componentDidMount() {
+        let user = JSON.parse(Store.fetch('USER'));
+        if(user){
+            this.setState({
+                username: user.name
+            })
+        }
         this.isActive();
         // console.log(this.state.username)
         Pubsub.subscribe('DO_RESERVATION', (msg,data)=>{

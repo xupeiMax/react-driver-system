@@ -38,11 +38,16 @@ class Coach extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: JSON.parse(Store.fetch('USER')).name
+            username: ''
         };
     }
     componentDidMount() { 
-
+        let user = JSON.parse(Store.fetch('USER'));
+        if (user) {
+            this.setState({
+                username: user.name
+            })
+        }
 
     }
 

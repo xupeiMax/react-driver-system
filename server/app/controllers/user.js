@@ -102,7 +102,7 @@ exports.signinRequired = function (req, res,next) {
 
 exports.adminRequired = function (req,res,next){
     var user = req.session.user;
-    if (user.role === 'undefined' || user.role <= 10){
+    if (user.role === 'undefined' || user.role <= 50){
         res.redirect('/signin')
     }
     next()    

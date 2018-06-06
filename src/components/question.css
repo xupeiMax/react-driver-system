@@ -24,3 +24,8 @@
     color: #00b1ff;
     border: 1px solid #00b1ff;
 }
+
+.component-question .comment-area {
+    text-align: left;
+    margin-top: 50px;
+}

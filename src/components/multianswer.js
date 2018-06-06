@@ -10,7 +10,8 @@ class MultiAnswer extends Component {
         this.state = {
             check: [],
             result: '',
-            youranswer: []            
+            youranswer: [],
+            youranswernum: []            
         };
         this.check = this.check.bind(this);
     }
@@ -18,7 +19,8 @@ class MultiAnswer extends Component {
         Pubsub.subscribe("NEXT", (msg) => {
             this.setState({
                 check: [],
-                result: ''
+                result: '',
+                descflag: false
             })
         })
     }
@@ -29,68 +31,93 @@ class MultiAnswer extends Component {
 
     check(index){
         console.log(index)
+        let abc = 'A';
         let youranswer = this.state.youranswer;
+        let youranswernum = this.state.youranswernum;        
         let check = this.state.check;
+        switch (index) {
+            case 0:
+                abc = 'A'
+                break;
+            case 1:
+                abc = 'B'
+                break;
+            case 2:
+                abc = 'C'
+                break;
+            case 3:
+                abc = 'D'
+                break;
+            default:
+                break;
+        }
         if (check[index] === 'checked'){
             check[index] = '';
-            youranswer.splice(youranswer.indexOf(index))
+            youranswer.splice(youranswer.indexOf(abc))
+            youranswernum.splice(youranswer.indexOf(index))            
         }else{
-            youranswer[youranswer.length] = index; 
+            youranswer[youranswer.length] = abc; 
+            youranswernum[youranswernum.length] = index;            
             check[index] = 'checked'
         }
         this.setState({
             youranswer: youranswer,
+            youranswernum: youranswernum,            
             check: check
         })
     }
 
     confirm(e){
-        let ans = this.props.ans;
-        let youranswer = this.state.youranswer;
+        let ans = this.props.ans.split('');
+        let ansnum = [];
+        ans.forEach(i=>{
+            switch (i) {
+                case "A":
+                    ansnum.push(0);
+                    break;
+                case "B":
+                    ansnum.push(1);
+                    break;
+                case "C":
+                    ansnum.push(2);
+                    break;
+                case "D":
+                    ansnum.push(3);
+                    break;
+                default:
+                    ansnum.push(0);
+                    break;
+            }
+        })
+        let youranswer = this.state.youranswer;        
+        let youranswernum = this.state.youranswernum;   
         let check = this.state.check;
         let result = this.state.result;
-        if (ans.sort().toString() === youranswer.sort().toString()){
+        if (ans.sort().toString() === youranswernum.sort().toString()){
             console.log("right")
-            youranswer.forEach(i=>{
+            youranswernum.forEach(i=>{
                 check[i] = "right"
             })
         }else{
             console.log("error")
-            ans.forEach(i=>{
-                if (youranswer.indexOf(i) > 0){
+            ansnum.forEach(i=>{
+                if (youranswernum.indexOf(i) > -1){
                     check[i] = "right"                    
                 }else{
                     check[i] = "blue"
                 }
             })
-            youranswer.forEach(i=>{
-                if (ans.indexOf(i) < 0) {
+            youranswer.forEach((v,i) => {
+                if (ans.indexOf(v) < 0) {
                     check[i] = "error"
                 }
             })
         }
-        ans.forEach(i=>{
-            switch (i) {
-                case 0:
-                    result += "A"
-                    break;
-                case 1:
-                    result += "B"
-                    break; 
-                case 2:
-                    result += "C"
-                    break; 
-                case 3:
-                    result += "D"
-                    break;
-                default:
-                    break;
-            }
-        })
-        result = "答案：" + result.split("").join("、")
+        result = "答案：" + ans.join("、")
         this.setState({
             check: check,
-            result: result
+            result: result,
+            descflag: true
         })
         e.target.style.display = "none"
     }
@@ -113,6 +140,7 @@ class MultiAnswer extends Component {
                 {liEle}
                 <div className="confirm" onClick={this.confirm.bind(this)}>确认答案</div>
                 <p>{this.state.result}</p>
+                {this.state.descflag ? (<p>解析： {this.props.desc}</p>) : ''}                                
             </div>
         )
     }

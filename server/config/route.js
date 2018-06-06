@@ -1,5 +1,6 @@
 var Index = require('../app/controllers/index');
 var User = require('../app/controllers/user');
+var Question = require('../app/controllers/question');
 // var Comment = require('../app/controllers/comment');
 // var Category = require('../app/controllers/category');
 
@@ -20,5 +21,9 @@ module.exports = function (app) {
         app.post('/user/signup', User.signup);
         app.post('/user/signin', User.signin);  
         app.get('/user/logout', User.logout);
+
+        // Question
+        app.post('/admin/question/new',Question.new);
+        app.get('/question',Question.list);
               
 }
