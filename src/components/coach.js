@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-// import Option from './option';
 import './coach.css';
 import logo from '../assets/images/tx.jpg';
 import Pubsub from 'pubsub-js';
+import Store from '../sources/store';
 
 class TimeSection extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+        }
     }
     doReserveHandler(index,id,e){
         let data = {
@@ -14,7 +16,6 @@ class TimeSection extends Component {
             id:id
         }
         Pubsub.publish('DO_RESERVATION', data);        
-        // this.props.doReserve(index);
         e.preventDefault();
         e.stopPropagation();
     }
@@ -25,7 +26,7 @@ class TimeSection extends Component {
         
         let timesection = ['8:00-10:00','10:00-12:00','14:00-16:00','16:00-18:00'];
         return (
-            <li className="component-timesection" onClick={this.doReserveHandler.bind(this,index,id)}>
+            <li className={`component-timesection ${this.props.focus ? 'seleted':''}`} onClick={this.doReserveHandler.bind(this,index,id)}>
                 <p>{timesection[index]}</p>
                 <p>共可预约3人 已约{students.length}人</p>
             </li>
@@ -37,9 +38,8 @@ class Coach extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            username: JSON.parse(Store.fetch('USER')).name
         };
-        this.doReserve = this.doReserve.bind(this);        
     }
     componentDidMount() { 
 
@@ -47,10 +47,6 @@ class Coach extends Component {
     }
 
     componentWillUnmount(){
-    }
-
-    doReserve(idx){
-
     }
 
     render() {
@@ -61,7 +57,7 @@ class Coach extends Component {
         let listEle = null;
         listEle = timeSection.map((item,index) => {
             return (
-                <TimeSection key={index} studentitem={item} index={index} id={id} doReserve={this.doReserve}></TimeSection>
+                <TimeSection key={index} studentitem={item} index={index} id={id} focus={item.indexOf(this.state.username) > -1}></TimeSection>
             );
         })
         return (

@@ -1,0 +1,54 @@
+.component-login{
+    max-width: 500px;
+    margin: 30px auto;
+}
+.component-login form {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.component-login .form-group {
+    width: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.component-login .form-group label,
+.form-group input {
+    display: block;
+    width: 300px;
+}
+
+.component-login .form-group label {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.component-login .form-group input {
+    height: 40px;
+    box-shadow: 2px 1px 13px 0 rgba(35, 24, 21, 0.11);
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.component-login input[type=submit] {
+    padding-left: 0;
+    cursor: pointer;
+}
+
+.component-login input[type=submit]:hover {
+    box-shadow: 2px 6px 13px 0 rgba(22, 26, 24, 0.11);
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translate3d(1px, 1px, 10px);
+}
+
+.component-login .form-radio {
+    margin: 0 auto;
+    width: 300px;
+}
+.component-login input[type=radio]{
+    margin-left: 30px;
+
+}

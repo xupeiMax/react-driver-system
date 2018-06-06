@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Pubsub from 'pubsub-js';
+import { Link } from "react-router-dom";
+// import Pubsub from 'pubsub-js';
+// import $ from "jquery";
 
 import './home.css';
 
@@ -8,45 +10,33 @@ class Home extends Component {
         super(props);
         this.state = {
         };
-        this.denglu = this.denglu.bind(this);
     }
-    componentDidMount() { }
-    denglu(e) {
-        e.preventDefault();    
-        const userName = e.target.elements[0].value;
-        const psw = e.target.elements[1].value;
-        Pubsub.publish('DENG_LU',userName,psw);
+    componentDidMount() {
+        // $.ajax({
+        //   "url": `http://localhost:3001/`
+        // }).then((result) => {
+        //   console.log(result)
+        // })
     }
-    render() {
 
+    render() {
         let userMessage;
-        if (this.props.loggedIn) {
+        // console.log(this.props)
+        if (this.props.user) {
             userMessage = (
                 <div className="welcome">
-                    <h2>{`欢迎回来， ${this.props.name}！`}</h2>
+                    <h2>{`欢迎回来， ${this.props.user.name}！`}</h2>
                 </div>
             )
         } else {
             userMessage = (
-                <form onSubmit={this.denglu}>
-                    <div className="form-group">
-                        <label>用户名</label>
-                        <input type="text" name="name" placeholder="请输入用户名"/>
-                    </div>
-                    <div className="form-group">
-                        <label>密码</label>
-                        <input type="password" name="psw" placeholder="请输入密码" />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="提 交"/>
-                    </div>
-                </form>
+                <div><h3>您还未登录，请先<span><Link to='/signin'>登录</Link></span> 或 <span><Link to="/signup">注册</Link></span></h3></div>
             )
         }
         return (
             <div className="wrap">
                 <div className="inner">
-                    <h1>驾考服务平台</h1>
+                    <h2>驾考服务平台</h2>
                     {userMessage}
                 </div>
             </div>

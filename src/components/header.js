@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+// import $ from "jquery"
+import Store from '../sources/store';
 
 import logo from '../assets/images/tx.jpg';
 import './header.css';
@@ -13,20 +15,28 @@ class Header extends Component {
     }
     componentDidMount() { }
 
-
+    logout(){
+        // $.ajax({
+        //     "url": `http://localhost:3001/user/logout`,
+        // }).then((result) => {
+            // console.log(result)
+            Store.delete("USER")
+            window.location = '/';
+        // })
+    }
     render() {
         let userProfile;
-        if (this.props.loggedIn) {
+        if (this.props.user) {
             userProfile = (
-                <div className="login-wrap">
+                <div className="login-wrap" onClick={this.logout.bind(this)}>
                     <img src={logo} width="55" alt="" />
-                    <span className="nichen text-overflow">{this.props.name}</span>
+                    <span className="nichen text-overflow">{this.props.user.name}</span>
                 </div>
             )
         }else{
             userProfile = (
                 <div className="login-wrap">
-                    <span><Link to="./">登录</Link></span><span> | </span><span><Link to="./">注册</Link></span>
+                    <span><Link to='/signin'>登录</Link></span><span> | </span><span><Link to="/signup">注册</Link></span>
                 </div>
             )
         }

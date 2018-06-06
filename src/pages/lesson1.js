@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch,Link } from 'react-router-dom';
 import Store from '../sources/store';
 import './lesson1.css';
-import { question } from '../sources/question';
+import { QUESTIONS } from '../sources/question';
 import Question from '../components/question';
 import Test from '../components/test';
 import Pubsub from 'pubsub-js';
@@ -13,6 +13,7 @@ class Lesson1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            question: QUESTIONS,            
             cur_id: 1,
             model: ''
         };
@@ -44,7 +45,7 @@ class Lesson1 extends Component {
                     })
                     break;
                 case "random":
-                    sui_id[sui_id.length] = Math.floor(Math.random() * question.length);
+                    sui_id[sui_id.length] = Math.floor(Math.random() * this.state.question.length);
                     idx++;
                     this.setState({
                         sui_id: sui_id,
@@ -92,10 +93,11 @@ class Lesson1 extends Component {
     setModel(model){
         this.setState({
             model: model,
-            sui_id: [Math.floor(Math.random() * question.length)]
+            sui_id: [Math.floor(Math.random() * this.state.question.length)]
         })
     }
     render() {
+        let question = this.state.question;
         let questionEle = null;
         if(this.state.model === "random"){
             questionEle = question[this.state.sui_id[this.state.idx]];

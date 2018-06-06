@@ -57,3 +57,6 @@ input[type=submit]:hover{
     transform: translate3d(1px,1px,10px);
 }
 
+.wrap span{
+    color: #00b1ff;
+}

@@ -33,14 +33,14 @@ class Lesson2 extends Component {
         this.state = {
             reservations: RESERVATIONS,            
             timeArr:[],
-            username: Store.fetch('USER_NAME')
+            username: JSON.parse(Store.fetch('USER')).name
         };
         this.isActive = this.isActive.bind(this);
     }
 
     componentDidMount() {
         this.isActive();
-        console.log(this.state.username)
+        // console.log(this.state.username)
         Pubsub.subscribe('DO_RESERVATION', (msg,data)=>{
             let index = data.index;
             let id = data.id;

@@ -30,3 +30,8 @@
 .component-timesection:hover{
     background-color: #ddd;
 }
+
+.component-timesection.seleted{
+    background-color: #00b1ff;
+    color: #fff;
+}
