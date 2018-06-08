@@ -1,4 +1,5 @@
-.component-question .ques {
+.component-question .ques,
+.component-question .flash {
     margin-top: 20px;
     text-align: left;
 }

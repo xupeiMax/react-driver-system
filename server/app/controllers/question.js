@@ -21,7 +21,9 @@ exports.new = function (req, res) {
 }
 
 exports.list = function (req, res) {
-    Question.find({}).exec(function (err, questions) {
+    var sub = req.query.subject;
+    // console.log(sub)
+    Question.find({subject:sub}).exec(function (err, questions) {
         if (err) {
             console.log(err)
         }

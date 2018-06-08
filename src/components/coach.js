@@ -8,6 +8,7 @@ class TimeSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: JSON.parse(Store.fetch('USER'))            
         }
     }
     doReserveHandler(index,id,e){
@@ -28,7 +29,7 @@ class TimeSection extends Component {
         return (
             <li className={`component-timesection ${this.props.focus ? 'seleted':''}`} onClick={this.doReserveHandler.bind(this,index,id)}>
                 <p>{timesection[index]}</p>
-                <p>共可预约3人 已约{students.length}人</p>
+                {this.state.user && this.state.user.role * 1 > 0 ? (<p>{students.join('、')}</p>):(<p>共可预约3人 已约{students.length}人</p>)}
             </li>
         )
     }

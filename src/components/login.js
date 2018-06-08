@@ -9,10 +9,17 @@ class Login extends Component {
         this.state = {
         };
         this.signin = this.signin.bind(this);
-        this.signup = this.signup.bind(this);        
+        this.signup = this.signup.bind(this);   
+        this.onchangehandler = this.onchangehandler.bind(this);     
     }
     componentDidMount() {
 
+    }
+    onchangehandler(e){
+        var value = e.target.value;
+        this.setState({
+            role: value
+        })
     }
     signin(e) {
         e.preventDefault();
@@ -31,12 +38,13 @@ class Login extends Component {
         e.preventDefault();
         const userName = e.target.elements[0].value;
         const psw = e.target.elements[1].value;
-        const role = e.target.elements[2].value;
+        // const role = e.target.elements[2].value;
+        // console.log(this.state.role)
         let data = {
             user: {
                 name: userName,
                 password: psw,
-                role: role
+                role: this.state.role
             }
         }
         Pubsub.publish("SIGN_UP", data);
@@ -59,8 +67,8 @@ class Login extends Component {
                             <input type="password" name="user[password]" placeholder="请输入密码" />
                         </div>
                         <div className="form-radio">
-                            <input type="radio" name="user[role]" value="0" defaultChecked="checked" />学员
-                            <input type="radio" name="user[role]" value="50" />教练                            
+                            <input type="radio" name="user[role]" value="0" defaultChecked onChange={this.onchangehandler} />学员
+                            <input type="radio" name="user[role]" value="50" onChange={this.onchangehandler} />教练                            
                         </div>
                         <div className="form-group">
                             <input type="submit" value="提 交"/>

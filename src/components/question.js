@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+import Store from '../sources/store';
 import './question.css';
 import Answer from '../components/answer';
 import MultiAnswer from '../components/multianswer';
@@ -8,7 +10,7 @@ class Question extends Component{
     constructor(props) {
         super(props);
         this.state = {
-          
+          user: JSON.parse(Store.fetch('USER'))
         };
     }
     componentDidMount() { }
@@ -20,6 +22,7 @@ class Question extends Component{
         let qNum = this.props.qNum + 1;
         let spanEle = null;
         let answerEle = null;
+        let user = this.state.user;
 
         if(questionEle.options.length > 2){
             if(questionEle.check.length > 1){
@@ -37,6 +40,7 @@ class Question extends Component{
         return(
             <div className="component-question">
                 <div className="ques" key={questionEle._id}>{spanEle}{this.props.model?'':qNum + '. '} {questionEle.title}</div>
+                {questionEle.flash ? (<div className="flash"><embed src={questionEle.flash} width="300" height="150"></embed></div>): ''}
                 {answerEle}
                 <div className="btn mt30 prev" onClick={this.next.bind(this, -1)}>上一题</div>
                 <div className="btn mt30 next" onClick={this.next.bind(this, 1)}>下一题</div> 
@@ -72,7 +76,12 @@ class Question extends Component{
                             <hr/>
                             <div id="comment">
                                 <form>
-                                    
+                                    <input type="hidden" name="comment[question]" value={questionEle._id} />
+                                    {user === null ?'': (<input type="hidden" name="comment[from]" value={user._id} />)}
+                                    <div className="form-group">
+                                        <textarea className="form-control" name="comment[content]" rows="3"></textarea>
+                                        {user === null ?(<span className="btn-link"><Link to="/signin">登录后评论</Link></span>):(<button className="btn btn-primary" type="submit">提交</button>)}
+                                    </div>
                                 </form>
                             </div>
                         </ul>

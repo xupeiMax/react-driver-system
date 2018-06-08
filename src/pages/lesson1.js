@@ -14,15 +14,17 @@ class Lesson1 extends Component {
         super(props);
         this.state = {
             question: [],            
-            cur_id: 0,
-            model: ''
+            cur_id: Store.fetch("question_id") === null ? 0:Store.fetch("question_id"),
+            model: '',
+            sui_id: [],
+            idx: 0
         };
     }
 
     componentDidMount() { 
         var that = this;
         $.ajax({
-          "url": `http://localhost:3001/question`
+          "url": `http://localhost:3001/question?subject=1`
         }).then((result) => {
           if(result.success){
             console.log(result.data)
@@ -30,11 +32,6 @@ class Lesson1 extends Component {
                 question: result.data
             })
         }
-        })
-        this.setState({
-            cur_id: Store.fetch("question_id") || 0,
-            sui_id: [],
-            idx: 0
         })
     }
 
@@ -110,7 +107,7 @@ class Lesson1 extends Component {
     render() {
         let question = this.state.question;
         let questionEle = null;
-        if (!question) {
+        if (question.length === 0) {
             return (
                 <h2>还没有题目哦！</h2>
             )
